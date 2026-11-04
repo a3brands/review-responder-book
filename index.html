@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="How A3 Review Responder finds, answers and reports on a dealership's reviews.">
+<title>A3 Review Responder Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@500&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+/* A book you read top to bottom and come back to: a contents rail beside one
+   long column, in the same cool neutrals, navy and blue as the product. */
+:root{
+  --bg:#f5f6f8; --surface:#ffffff; --sunk:#eef0f4; --ink:#161b22; --ink-2:#4d5766; --ink-3:#6b7584;
+  --line:#e2e5eb; --line-2:#cbd1db; --accent:#2360cc; --accent-soft:#e8effc; --star:#b97f00;
+  --alert:#b4271c; --alert-soft:#fcecea; --good:#1c7a52; --good-soft:#e5f3ec;
+  --hero:#0f1b33; --hero-2:#1b2d52; --hero-ink:#ffffff; --hero-ink-2:#c3cfe3;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1217; --surface:#171b22; --sunk:#1e232b; --ink:#e8ebf0; --ink-2:#aab3c0; --ink-3:#8f99a8;
+  --line:#272d36; --line-2:#38404b; --accent:#7aa6f5; --accent-soft:#1a2436; --star:#e3b341;
+  --alert:#ee9a92; --alert-soft:#2c1a19; --good:#66bb92; --good-soft:#16291f;
+  --hero:#111a2c; --hero-2:#1a2846; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0f1217; --surface:#171b22; --sunk:#1e232b; --ink:#e8ebf0; --ink-2:#aab3c0; --ink-3:#8f99a8;
+  --line:#272d36; --line-2:#38404b; --accent:#7aa6f5; --accent-soft:#1a2436; --star:#e3b341;
+  --alert:#ee9a92; --alert-soft:#2c1a19; --good:#66bb92; --good-soft:#16291f;
+  --hero:#111a2c; --hero-2:#1a2846; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.7 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+.cover{background:linear-gradient(160deg,var(--hero) 0%,var(--hero-2) 100%);color:var(--hero-ink);
+  padding-block:64px 56px;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.cover-in{max-width:1120px;margin:0 auto}
+.kicker{font:500 12px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--hero-ink-2);margin:0}
+.cover h1{font:800 clamp(2.5rem,7vw,4.4rem)/1.02 var(--display);letter-spacing:-.03em;margin:16px 0 18px;text-wrap:balance;max-width:14ch}
+.cover .lede{font-size:clamp(1.08rem,2.2vw,1.3rem);line-height:1.55;color:var(--hero-ink-2);max-width:40em;margin:0}
+.cover .edition{margin:30px 0 0;font-size:14px;color:var(--hero-ink-2)}
+
+.layout{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:232px minmax(0,1fr);gap:64px;align-items:start;
+  padding-block:0 80px;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.rail{position:sticky;top:env(safe-area-inset-top,0px);padding-block:40px 24px;max-height:100vh;overflow-y:auto}
+.rail h2{font:500 11.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 14px}
+.rail ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.rail a{display:grid;grid-template-columns:26px 1fr;padding:6px 10px;border-radius:7px;color:var(--ink-2);text-decoration:none;font-size:14px;line-height:1.35}
+.rail a span{font:500 12px/1.6 var(--mono);color:var(--ink-3)}
+.rail a:hover{background:var(--sunk);color:var(--ink)}
+.rail a.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.rail a.on span{color:var(--accent)}
+.toc-mobile{display:none}
+
+main{min-width:0;max-width:44rem}
+.chapter{padding-top:56px;scroll-margin-top:0}
+.chapter + .chapter{margin-top:24px;border-top:1px solid var(--line)}
+.num{font:500 12.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0}
+h2.title{font:700 clamp(1.75rem,4vw,2.35rem)/1.12 var(--display);letter-spacing:-.02em;margin:10px 0 18px;text-wrap:balance}
+h3{font:700 1.14rem/1.3 var(--display);margin:32px 0 6px}
+p{margin:0 0 14px}
+.intro{font-size:1.14rem;line-height:1.6;color:var(--ink-2)}
+main ul{margin:0 0 16px;padding-left:22px}
+main li{margin-bottom:7px}
+
+.journey{list-style:none;margin:26px 0 8px;padding:0;display:grid;gap:0}
+.journey li{display:grid;grid-template-columns:42px minmax(0,1fr);gap:16px;margin:0;padding-bottom:22px;position:relative}
+.journey li::before{content:"";position:absolute;left:20px;top:40px;bottom:0;width:2px;background:var(--line-2)}
+.journey li:last-child{padding-bottom:0}
+.journey li:last-child::before{display:none}
+.journey .dot{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:2px solid var(--line-2);font:700 15px/1 var(--display);color:var(--ink-2)}
+.journey .human .dot,.journey li.human .dot{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.journey h3{margin:8px 0 3px}
+.journey p{margin:0;color:var(--ink-2)}
+.tag{display:inline-block;font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:4px 7px;border-radius:5px;margin-left:8px;vertical-align:2px;background:var(--sunk);color:var(--ink-2)}
+.tag.person{background:var(--accent-soft);color:var(--accent)}
+
+.tablewrap{overflow-x:auto;margin:18px 0 20px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.45}
+th{font:600 13px/1.3 var(--body);text-align:left;color:var(--ink-3);padding:11px 14px;border-bottom:1px solid var(--line-2);white-space:nowrap}
+td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600}
+
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px;margin:18px 0 12px}
+.example{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;min-width:0}
+.example .label{font:500 11.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0 0 10px}
+.example .stars{color:var(--star);letter-spacing:.08em;font-size:15px}
+.example .who{font-weight:600;margin:0}
+.example blockquote{margin:6px 0 14px;color:var(--ink-2);font-style:italic}
+.example .draft{margin:0;padding-top:12px;border-top:1px solid var(--line)}
+.note{font-size:14px;color:var(--ink-3)}
+.promise{background:var(--accent-soft);border-radius:10px;padding:18px 20px;margin:20px 0;font:600 1.08rem/1.45 var(--body);color:var(--ink)}
+
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-bottom:8px}
+summary{cursor:pointer;font-weight:600;padding:13px 16px;line-height:1.4}
+details p{padding:0 16px 14px;margin:0;color:var(--ink-2)}
+footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-3)}
+
+@media (max-width:900px){
+  body{font-size:16.5px}
+  .layout{display:block}
+  .rail{display:none}
+  .toc-mobile{display:block;margin-top:24px}
+  .toc-mobile summary{font-size:15px}
+  .toc-mobile ol{margin:0;padding:0 16px 14px 38px;font-size:15px}
+  .toc-mobile li{margin-bottom:5px}
+  .chapter{padding-top:40px}
+  .cover{padding-block:44px 40px}
+}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="cover-in">
+    <p class="kicker">A3 Brands</p>
+    <h1>A3 Review Responder</h1>
+    <p class="lede">How your dealership's reviews are found, answered and reported on, and where a person stays in charge of every reply.</p>
+    <p class="edition">A guide for dealerships and new clients. Edition of November 2026.</p>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="rail" aria-label="Contents">
+    <h2>Contents</h2>
+    <ol id="rail">
+      <li><a href="#what"><span>1</span>What it is</a></li>
+      <li><a href="#journey"><span>2</span>The life of a review</a></li>
+      <li><a href="#platforms"><span>3</span>Where reviews come from</a></li>
+      <li><a href="#replies"><span>4</span>How replies are written</a></li>
+      <li><a href="#approval"><span>5</span>Approval and posting</a></li>
+      <li><a href="#emails"><span>6</span>The emails you receive</a></li>
+      <li><a href="#portal"><span>7</span>Your review portal</a></li>
+      <li><a href="#reports"><span>8</span>Monthly reports</a></li>
+      <li><a href="#insight"><span>9</span>Patterns and competitors</a></li>
+      <li><a href="#start"><span>10</span>Getting started</a></li>
+      <li><a href="#trust"><span>11</span>Accuracy and security</a></li>
+      <li><a href="#faq"><span>12</span>Common questions</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <details class="toc-mobile">
+      <summary>Contents</summary>
+      <ol>
+        <li><a href="#what">What it is</a></li>
+        <li><a href="#journey">The life of a review</a></li>
+        <li><a href="#platforms">Where reviews come from</a></li>
+        <li><a href="#replies">How replies are written</a></li>
+        <li><a href="#approval">Approval and posting</a></li>
+        <li><a href="#emails">The emails you receive</a></li>
+        <li><a href="#portal">Your review portal</a></li>
+        <li><a href="#reports">Monthly reports</a></li>
+        <li><a href="#insight">Patterns and competitors</a></li>
+        <li><a href="#start">Getting started</a></li>
+        <li><a href="#trust">Accuracy and security</a></li>
+        <li><a href="#faq">Common questions</a></li>
+      </ol>
+    </details>
+
+    <section class="chapter" id="what">
+      <p class="num">Chapter 1</p>
+      <h2 class="title">What it is</h2>
+      <p class="intro">Customers review a dealership on many different websites. Keeping up means checking each one, writing a reply in the right tone, and doing it before an unhappy customer feels ignored.</p>
+      <p>A3 Review Responder brings those reviews into one place. When a new review arrives, it drafts a reply in your dealership's voice and tells the right people. The A3 team checks the reply before it goes anywhere. Your dealership gets a portal and a monthly report showing how its reputation is doing.</p>
+      <div class="promise">AI writes the first draft. A person decides what is published.</div>
+      <h3>What it does for you</h3>
+      <ul>
+        <li><b>One view of your reviews</b> from seven platforms, so nothing depends on someone remembering to check each site.</li>
+        <li><b>A reply drafted for each new review,</b> based on what that customer actually wrote.</li>
+        <li><b>A prompt email to your dealership</b> when a new review arrives, with a link to that review.</li>
+        <li><b>Follow-up on the reviews that matter most.</b> A reply to a 1 or 2 star review that is still waiting after 48 hours goes to the A3 leads.</li>
+        <li><b>Monthly reports</b> that A3 checks before you see them.</li>
+      </ul>
+    </section>
+
+    <section class="chapter" id="journey">
+      <p class="num">Chapter 2</p>
+      <h2 class="title">The life of a review</h2>
+      <p class="intro">This is what happens from the moment a customer posts a review. The blue steps are the ones a person does.</p>
+      <ol class="journey">
+        <li><span class="dot">1</span><div><h3>The review is found</h3><p>The tool reads your listings on a schedule and adds anything new. Chapter 3 shows how often.</p></div></li>
+        <li><span class="dot">2</span><div><h3>You are told</h3><p>Your dealership's contact gets a "New review" email with a link to that review. The A3 team is told as well.</p></div></li>
+        <li><span class="dot">3</span><div><h3>A reply is drafted</h3><p>The draft uses the customer's name, responds to what they said, and follows the way your dealership already writes.</p></div></li>
+        <li class="human"><span class="dot">4</span><div><h3>A3 approves or changes it<span class="tag person">Person</span></h3><p>A3's approver reads the draft, edits it if needed, and approves it. A draft nobody approves is never published.</p></div></li>
+        <li class="human"><span class="dot">5</span><div><h3>The reply is posted<span class="tag person">Person</span></h3><p>Approved replies wait in a list called Ready to post until someone at A3 publishes them on the platform.</p></div></li>
+        <li><span class="dot">6</span><div><h3>It shows in your figures</h3><p>The review and its reply status appear in your portal, and they count toward your next monthly report.</p></div></li>
+      </ol>
+    </section>
+
+    <section class="chapter" id="platforms">
+      <p class="num">Chapter 3</p>
+      <h2 class="title">Where reviews come from</h2>
+      <p class="intro">Seven platforms are supported. Which ones apply depends on where your dealership is listed.</p>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Platform</th><th>How it is read</th><th>How often</th></tr></thead>
+        <tbody>
+          <tr><td>Google</td><td>Google's Business Profile connection, once your listing is linked</td><td>Every 30 minutes</td></tr>
+          <tr><td>DealerRater</td><td>Your public page</td><td>Once a day</td></tr>
+          <tr><td>Carfax</td><td>Your public page</td><td>Once a day</td></tr>
+          <tr><td>Carfax Service</td><td>Your public page</td><td>Once a day</td></tr>
+          <tr><td>Cars.com</td><td>Your public page</td><td>Once a day</td></tr>
+          <tr><td>CarGurus</td><td>Your public page</td><td>Once a day</td></tr>
+          <tr><td>Edmunds</td><td>Your public page</td><td>Once a day</td></tr>
+        </tbody>
+      </table></div>
+      <p>When a review is posted on two platforms, such as DealerRater and Cars.com, it counts as one customer in your figures.</p>
+      <p>Some platforms don't publish a star rating for every review. When there is no rating, the tool shows none and doesn't guess one.</p>
+      <p>Your whole review history is collected so your figures are complete, but drafts and "New review" emails are only for recent reviews. You won't get a flood of emails about old ones when you join.</p>
+    </section>
+
+    <section class="chapter" id="replies">
+      <p class="num">Chapter 4</p>
+      <h2 class="title">How replies are written</h2>
+      <p class="intro">A good reply sounds like your dealership and shows that someone read the review.</p>
+      <ul>
+        <li><b>It follows your voice.</b> The draft draws on replies your dealership has already posted or approved: how you greet people, how long you write, how you sign off.</li>
+        <li><b>It only mentions what the customer said.</b> It doesn't add details or make up what happened.</li>
+        <li><b>Its length suits the review.</b> A short five star review gets a short thank-you. A complaint gets a reply that addresses the problem raised.</li>
+      </ul>
+      <div class="pair">
+        <div class="example">
+          <p class="label">Example: praise</p>
+          <p class="who">Sarah M. <span class="stars" aria-label="5 stars">★★★★★</span></p>
+          <blockquote>Second car I've bought here. Ask for Danny, no pressure at all.</blockquote>
+          <p class="draft">Thank you, Sarah, and thank you for coming back to us. I'll pass this straight on to Danny. Enjoy the new car.</p>
+        </div>
+        <div class="example">
+          <p class="label">Example: complaint</p>
+          <p class="who">Tom R. <span class="stars" aria-label="1 star">★</span></p>
+          <blockquote>Waited three hours for an oil change and nobody told me why.</blockquote>
+          <p class="draft">Tom, we're sorry about the long wait and that nobody kept you informed. We'd like to hear more and put this right. Please call our service team directly.</p>
+        </div>
+      </div>
+      <p class="note">These two examples are made up to show the style. They aren't real customers or real replies.</p>
+      <h3>1 and 2 star reviews</h3>
+      <p>On a negative review, the draft is a starting point. It acknowledges the problem and offers to help, but it can't know what happened at your dealership. A good reply adds a specific detail and a real contact, doesn't argue in public, doesn't name an employee, and goes out quickly.</p>
+    </section>
+
+    <section class="chapter" id="approval">
+      <p class="num">Chapter 5</p>
+      <h2 class="title">Approval and posting</h2>
+      <p class="intro">Nothing is published without a person's decision. This is the most important rule in the tool.</p>
+      <h3>Who approves</h3>
+      <p>The A3 team checks every draft first. Dealership owners don't need to approve anything or sign in for a reply to be handled. They see the review and can follow up with the customer themselves.</p>
+      <h3>How a draft can't get lost</h3>
+      <ul>
+        <li><b>A daily reminder</b> goes to the approver each morning while replies have been waiting too long.</li>
+        <li><b>1 and 2 star reviews are escalated.</b> After 48 hours without approval, the A3 leads are emailed each day until they're cleared.</li>
+        <li><b>One decision per reply.</b> If two people click Approve, only the first counts.</li>
+      </ul>
+      <h3>When your team replies first</h3>
+      <p>If your dealership has already answered a review on the listing, the tool stops offering its draft. A review doesn't end up with two replies from you. This check depends on the platform showing replies, and some don't, so tell A3 if you have answered somewhere the tool can't see.</p>
+    </section>
+
+    <section class="chapter" id="emails">
+      <p class="num">Chapter 6</p>
+      <h2 class="title">The emails you receive</h2>
+      <p class="intro">Dealership contacts get few emails, and each one is about something specific.</p>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Email</th><th>When it is sent</th><th>What to do</th></tr></thead>
+        <tbody>
+          <tr><td>New review</td><td>A recent review has just arrived</td><td>Read it. Follow up with the customer if you want to.</td></tr>
+          <tr><td>Your invitation</td><td>When your login is created</td><td>Open the link and choose your password.</td></tr>
+          <tr><td>Sign-in code</td><td>Each time a code is needed to sign in</td><td>Enter the code on the sign-in page.</td></tr>
+        </tbody>
+      </table></div>
+      <p>Each "New review" email has a button that opens that review. On Google, it goes to the customer's own review whenever the tool has its link, and otherwise to your listing. On pages that list many reviews, it scrolls to the review where the browser supports this.</p>
+      <p>Replies to these emails aren't received. To reach us, contact your A3 team directly.</p>
+    </section>
+
+    <section class="chapter" id="portal">
+      <p class="num">Chapter 7</p>
+      <h2 class="title">Your review portal</h2>
+      <p class="intro">The portal shows how your dealership's reviews are doing on one page. You only see your own dealerships.</p>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Section</th><th>What it shows</th></tr></thead>
+        <tbody>
+          <tr><td>The headline figures</td><td>New reviews this month, how many have a reply, and how many 1 and 2 star reviews need attention</td></tr>
+          <tr><td>Needs your attention</td><td>Unanswered 1 and 2 star reviews on sites that show replies</td></tr>
+          <tr><td>Latest reviews</td><td>Your newest reviews, with their rating and whether they have a reply</td></tr>
+          <tr><td>Reviews each month</td><td>A chart of how many reviews you receive</td></tr>
+          <tr><td>Who your customers name</td><td>Staff that customers mention by name</td></tr>
+          <tr><td>Monthly reports</td><td>Each report once A3 has published it</td></tr>
+        </tbody>
+      </table></div>
+      <p>If something looks wrong, such as a login problem or a missing review, contact your A3 team.</p>
+    </section>
+
+    <section class="chapter" id="reports">
+      <p class="num">Chapter 8</p>
+      <h2 class="title">Monthly reports</h2>
+      <p class="intro">Each month gets a report on what customers said and how the dealership responded. It's drafted automatically after the month ends.</p>
+      <ul>
+        <li><b>The figures</b> come from the reviews the tool holds, including responses and trends.</li>
+        <li><b>A written summary</b> and two or three recommendations are drafted by AI from that month's figures and comments.</li>
+        <li><b>Staff shout-outs</b> list employees customers praised by name, with a line from a review.</li>
+        <li><b>A reputation score</b> shows its formula openly, so you can see how it was reached.</li>
+        <li><b>Outside reference figures</b> are quoted with their source and date, and aren't presented as your own results.</li>
+      </ul>
+      <div class="promise">An A3 team member checks each report and can rewrite its text. You only see it once it's published.</div>
+    </section>
+
+    <section class="chapter" id="insight">
+      <p class="num">Chapter 9</p>
+      <h2 class="title">Patterns and competitors</h2>
+      <p class="intro">Individual reviews tell you about one customer. These features look across many.</p>
+      <h3>Sentiment</h3>
+      <p>The Sentiment view sums up what reviews say, including what positive reviews praise and how ratings are spread. Because platforms publish different things, each figure says what it covers. Complaint themes are matched from review wording, so treat them as a guide.</p>
+      <h3>Recurring complaint alerts</h3>
+      <p>When the same problem shows up in several 1 and 2 star reviews within a month, such as long waits in service or finance not calling back, the A3 team gets an alert with those reviews, so it doesn't have to wait for the monthly report.</p>
+      <h3>Nearby competitors</h3>
+      <p>The Competitors view sets your Google reviews beside those of nearby dealerships of the same brand, using public Google data read once a week. Each rival figure shows when it was read.</p>
+    </section>
+
+    <section class="chapter" id="start">
+      <p class="num">Chapter 10</p>
+      <h2 class="title">Getting started</h2>
+      <p class="intro">Accounts aren't self-service, for a good reason. If anyone could sign up and choose a dealership, a stranger could see that dealership's reviews. A3 sets up each client.</p>
+      <ol class="journey">
+        <li class="human"><span class="dot">1</span><div><h3>Ask for access<span class="tag person">You</span></h3><p>Talk to A3, or choose Request access on the sign-in page and fill in your dealership, name and email.</p></div></li>
+        <li><span class="dot">2</span><div><h3>A3 adds your dealership</h3><p>A3 adds your listings on each platform and collects your review history. Your figures are complete from the start.</p></div></li>
+        <li><span class="dot">3</span><div><h3>A3 creates your login</h3><p>Your login is linked to your dealership only.</p></div></li>
+        <li class="human"><span class="dot">4</span><div><h3>Choose your password<span class="tag person">You</span></h3><p>You get an invitation by email. You set your own password through the link, so nobody at A3 ever knows it.</p></div></li>
+        <li class="human"><span class="dot">5</span><div><h3>Sign in<span class="tag person">You</span></h3><p>Enter your password and the code sent to your email. You can set up a passkey on your device for later sign-ins.</p></div></li>
+      </ol>
+      <h3>What A3 will ask you for</h3>
+      <ul>
+        <li>Your dealership's name and the review platforms you're listed on</li>
+        <li>Access to your Google Business Profile, so that listing can be read</li>
+        <li>The email addresses that should get "New review" emails and portal logins</li>
+      </ul>
+    </section>
+
+    <section class="chapter" id="trust">
+      <p class="num">Chapter 11</p>
+      <h2 class="title">Accuracy and security</h2>
+      <h3>How figures stay accurate</h3>
+      <ul>
+        <li><b>One counting rule everywhere.</b> Each customer counts once, and only reviews still listed count. The portal, reports and emails all use the same rule.</li>
+        <li><b>Removed reviews leave your figures.</b> If Google takes a review down, it stops counting, and it comes back automatically if Google shows it again.</li>
+        <li><b>Your Google total is checked against Google's own.</b> The rating and total refresh on each read.</li>
+        <li><b>Estimates are labelled.</b> Where something is estimated, such as complaint themes, the tool says so.</li>
+      </ul>
+      <h3>How your account is protected</h3>
+      <ul>
+        <li><b>Two-step sign-in.</b> A password alone doesn't open an account. It also takes an emailed code or a passkey.</li>
+        <li><b>Your dealership only.</b> The server checks each request, so a login can only reach the dealerships linked to it.</li>
+        <li><b>Encrypted Google connection.</b> The key for reading your Google listing is stored encrypted.</li>
+      </ul>
+      <h3>How your data is protected</h3>
+      <ul>
+        <li><b>Nightly backups.</b> The review data is backed up every night, and each backup is test-restored to prove it works.</li>
+        <li><b>Monitoring.</b> A watchdog checks the system every five minutes, tries to restart it if something has stopped, and alerts the A3 team.</li>
+      </ul>
+    </section>
+
+    <section class="chapter" id="faq">
+      <p class="num">Chapter 12</p>
+      <h2 class="title">Common questions</h2>
+      <details><summary>Can anything be posted without approval?</summary><p>No. A reply is only published after a person has approved it. If nobody approves it, nothing is posted.</p></details>
+      <details><summary>Do I have to approve replies myself?</summary><p>No. The A3 team checks and approves drafts. You get the "New review" email and can use your portal whenever you want.</p></details>
+      <details><summary>What if I already replied to a review?</summary><p>Where the platform shows replies, the tool sees yours and stops offering its draft. On platforms that don't show them, tell A3 so a second reply isn't posted.</p></details>
+      <details><summary>Why do some reviews have no star rating?</summary><p>Some platforms don't publish a rating for each review. The tool leaves it blank and doesn't guess.</p></details>
+      <details><summary>Why do some reviews have no text?</summary><p>Customers can leave a rating without a comment. These reviews still count toward your rating.</p></details>
+      <details><summary>Will I get emails about old reviews?</summary><p>No. Your history is collected so your figures are complete, but "New review" emails and drafts are only for recent reviews.</p></details>
+      <details><summary>Can I change who gets the emails?</summary><p>Yes. Send your A3 team the addresses you want to use.</p></details>
+      <details><summary>Can other people at my dealership see the portal?</summary><p>Yes. Ask A3 to add a login for each person. Every login sees only the dealerships linked to it.</p></details>
+      <footer>A3 Brands · A3 Review Responder. This guide describes the tool as of November 2026.</footer>
+    </section>
+  </main>
+</div>
+
+<script>
+(function () {
+  var links = [].slice.call(document.querySelectorAll('#rail a'));
+  var byId = {};
+  links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+  if (!('IntersectionObserver' in window)) return;
+  var seen = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      links.forEach(function (a) { a.classList.remove('on'); });
+      byId[e.target.id].classList.add('on');
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  document.querySelectorAll('.chapter').forEach(function (s) { seen.observe(s); });
+  document.querySelectorAll('.toc-mobile a').forEach(function (a) {
+    a.addEventListener('click', function () { a.closest('details').open = false; });
+  });
+})();
+</script>
+</body>
+</html>
