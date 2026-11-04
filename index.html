@@ -40,6 +40,28 @@ a{color:inherit}
 @keyframes a3mk{to{opacity:1;transform:none}}
 @keyframes a3bar{to{width:100%}}
 
+/* Opening screen, kept from the handbook design */
+.landing{position:fixed;inset:0;z-index:50;background:var(--graphite);color:var(--white);overflow:hidden auto;display:flex;flex-direction:column;font:400 16.5px/1.68 var(--body);transition:opacity .35s ease,visibility .35s;
+  padding-block:clamp(24px,5vh,48px);padding-left:max(clamp(20px,6vw,88px),env(safe-area-inset-left,0px));padding-right:max(clamp(20px,6vw,88px),env(safe-area-inset-right,0px))}
+.landing.out{opacity:0;visibility:hidden}
+.land-art{position:absolute;inset:0;width:100%;height:100%;min-height:100%;pointer-events:none}
+.landing>*:not(.land-art){position:relative}
+.landing .plate{background:#fff;border-radius:3px;padding:8px 12px;width:clamp(128px,15vw,172px);align-self:flex-start;flex:none}
+.land-main{margin-top:auto;padding-top:48px;max-width:42rem}
+.landing .eyebrow{font:600 12px/1.4 var(--body);letter-spacing:.17em;text-transform:uppercase;color:var(--bronze);margin:0}
+.landing h1{font:800 clamp(2.7rem,7.2vw,5.1rem)/1.03 var(--head);letter-spacing:-.032em;margin:14px 0 14px;text-wrap:balance}
+.landing .sub{font:600 clamp(1.08rem,2.1vw,1.42rem)/1.32 var(--head);margin:0 0 20px;color:var(--on-dark)}
+.landing .desc{margin:0 0 30px;color:var(--on-dark-2);max-width:35rem;font-size:1.02rem}
+.land-actions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:clamp(30px,6vh,54px)}
+.btn{display:inline-flex;align-items:center;gap:9px;min-height:46px;padding:0 20px;border-radius:4px;font:600 15px/1 var(--body);text-decoration:none;border:1px solid transparent;cursor:pointer}
+.btn.solid{background:var(--ivory);color:var(--graphite)}
+.btn.solid:hover{background:#fff}
+.btn.ghost{border-color:var(--line-dark);color:var(--on-dark);background:transparent}
+.btn.ghost:hover{border-color:var(--on-dark-2)}
+.colophon{display:flex;flex-wrap:wrap;gap:6px 26px;border-top:1px solid var(--line-dark);padding-top:15px;font-size:13px;color:var(--on-dark-2);margin:0}
+@media (max-width:760px){.land-art{opacity:.42}}
+@media (prefers-reduced-motion:reduce){.landing{transition:none}}
+
 /* The book */
 .reader{height:100%;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
 .desk{flex:1;min-height:0;display:grid;place-items:center;perspective:2600px;overflow:hidden}
@@ -257,13 +279,43 @@ tbody td:first-child{font-weight:600}
 @media (max-width:560px){.bar .chap .lbl{display:none}.bar .chap svg{margin:0}#where{min-width:7em}}
 @media (prefers-reduced-motion:reduce){.book,.turner,.prog i{transition:none}.a3intro{transition:none}}
 </style>
-<noscript><style>#src{display:block;max-width:44rem;margin:0 auto;padding:24px;background:#F5F3EE}.reader{display:none}body{overflow:auto}</style></noscript>
+<noscript><style>#src{display:block;max-width:44rem;margin:0 auto;padding:24px;background:#F5F3EE}.reader,.landing{display:none}body{overflow:auto}</style></noscript>
 </head>
 <body>
 
 <div class="a3intro" id="a3intro" hidden aria-hidden="true"><div class="mk"><img data-logo alt=""><div class="ibar"><i></i></div></div></div>
 
-<div class="reader">
+<section class="landing" id="landing" aria-label="Cover">
+  <svg class="land-art" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs><pattern id="gr" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#FFFFFF" stroke-opacity=".028"/></pattern></defs>
+    <rect width="1200" height="800" fill="url(#gr)"/>
+    <g fill="none" stroke="#6F7E87" stroke-opacity=".5" stroke-width="1">
+      <path d="M1160 70C1020 70 1000 300 860 300"/><path d="M1160 170C1040 170 1000 300 860 300"/><path d="M1160 270C1060 270 1000 300 860 300"/><path d="M1160 370C1060 370 1000 300 860 300"/><path d="M1160 470C1040 470 1000 300 860 300"/><path d="M1160 570C1020 570 1000 300 860 300"/><path d="M1160 670C1000 670 1000 300 860 300"/>
+      <path d="M860 300H760" stroke-width="1.5"/><path d="M640 300H560"/>
+    </g>
+    <path d="M820 300H700" stroke="#557C68" stroke-width="2.5"/>
+    <g fill="#18232B" stroke="#8F9CA4" stroke-width="1.2">
+      <circle cx="1160" cy="70" r="6"/><circle cx="1160" cy="170" r="6"/><circle cx="1160" cy="270" r="6"/><circle cx="1160" cy="370" r="6"/><circle cx="1160" cy="470" r="6"/><circle cx="1160" cy="570" r="6"/><circle cx="1160" cy="670" r="6"/>
+      <circle cx="860" cy="300" r="15"/>
+    </g>
+    <circle cx="700" cy="300" r="24" fill="#557C68"/><circle cx="700" cy="300" r="39" fill="none" stroke="#557C68" stroke-opacity=".55"/>
+    <circle cx="560" cy="300" r="5" fill="#B58A61"/>
+  </svg>
+  <div class="plate"><img data-logo alt="A3 Brands LLC"></div>
+  <div class="land-main">
+    <p class="eyebrow">Product handbook</p>
+    <h1>A3 Review Responder</h1>
+    <p class="sub">Platform Overview &amp; Operational Handbook</p>
+    <p class="desc">How dealership reviews are collected from seven platforms, how AI suggests a response, and where a person decides what is published.</p>
+    <div class="land-actions">
+      <a class="btn solid" href="#cover" data-open="cover">Start reading →</a>
+      <a class="btn ghost" href="#contents" data-open="contents">Contents</a>
+    </div>
+    <p class="colophon"><span>A3 Brands LLC</span><span>First edition</span><span>November 2026</span></p>
+  </div>
+</section>
+
+<div class="reader" id="readerEl">
   <div class="desk"><div class="book" id="book"></div></div>
   <nav class="bar" aria-label="Book controls">
     <div class="prog" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100" id="progbar"><i id="prog"></i></div>
@@ -561,6 +613,27 @@ tbody td:first-child{font-weight:600}
     box.addEventListener('click', function () { clearTimeout(t); reveal(); });
   })();
 
+  // The opening screen shows unless a link points inside the book.
+  var landing = document.getElementById('landing'), readerEl = document.getElementById('readerEl');
+  var onLanding = !location.hash || location.hash === '#home';
+  if (!onLanding) { landing.hidden = true; } else readerEl.inert = true;
+  function openBook(key) {
+    var at = key === 'contents' ? pageOfKey('contents') : 0;
+    book.classList.add('still'); cur = spreadOf(at); onLanding = false; readerEl.inert = false;
+    landing.classList.add('out'); landing.inert = true; render();
+    requestAnimationFrame(function () { requestAnimationFrame(function () { book.classList.remove('still'); }); });
+  }
+  function toLanding() {
+    onLanding = true; readerEl.inert = true; closeMenu();
+    landing.hidden = false; landing.inert = false; landing.classList.remove('out'); landing.scrollTop = 0;
+    document.title = 'A3 Review Responder';
+    try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { /* the frame may refuse */ }
+  }
+  landing.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-open]'); if (!a) return;
+    e.preventDefault(); openBook(a.getAttribute('data-open'));
+  });
+
   var book = document.getElementById('book');
   var prevB = document.getElementById('prev'), nextB = document.getElementById('next'), where = document.getElementById('where');
   var chapBtn = document.getElementById('chapBtn'), menu = document.getElementById('menu');
@@ -826,7 +899,7 @@ tbody td:first-child{font-weight:600}
     return c;
   }
   function update() {
-    prevB.disabled = cur === 0;
+    if (onLanding) return;
     nextB.disabled = cur === spreads.length - 1;
     where.textContent = folioText(cur);
     var pct = spreads.length > 1 ? Math.round(cur / (spreads.length - 1) * 100) : 0;
@@ -903,7 +976,7 @@ tbody td:first-child{font-weight:600}
   }
   function closeMenu() { menu.hidden = true; chapBtn.setAttribute('aria-expanded', 'false'); }
 
-  prevB.addEventListener('click', function () { go(cur - 1); });
+  prevB.addEventListener('click', function () { if (cur === 0) toLanding(); else go(cur - 1); });
   nextB.addEventListener('click', function () { go(cur + 1); });
   chapBtn.addEventListener('click', function (e) { e.stopPropagation(); menu.hidden = !menu.hidden; chapBtn.setAttribute('aria-expanded', String(!menu.hidden)); });
   menu.addEventListener('click', function (e) {
@@ -914,8 +987,9 @@ tbody td:first-child{font-weight:600}
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') { closeMenu(); return; }
     if (e.altKey || e.ctrlKey || e.metaKey) return;
+    if (onLanding) { if (e.key === 'ArrowRight') openBook('cover'); return; }
     if (e.key === 'ArrowRight' || e.key === 'PageDown' || (e.key === ' ' && !/BUTTON|A/.test(e.target.tagName))) { e.preventDefault(); go(cur + 1); }
-    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(cur - 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); if (cur === 0) toLanding(); else go(cur - 1); }
     if (e.key === 'Home') go(0);
     if (e.key === 'End') go(spreads.length - 1);
   });
@@ -938,6 +1012,7 @@ tbody td:first-child{font-weight:600}
   var rt;
   window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { build(keyOf(cur)); }, 160); });
   window.addEventListener('hashchange', function () {
+    if (onLanding && location.hash) { openBook(fromHash() === 'contents' ? 'contents' : 'cover'); return; }
     var at = fromHash() === 'cover' ? 0 : pageOfKey(fromHash());
     if (at >= 0 && spreadOf(at) !== cur) go(spreadOf(at));
   });
