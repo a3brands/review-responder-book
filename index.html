@@ -44,10 +44,10 @@ a{color:inherit}
 .landing{position:fixed;inset:0;z-index:50;background:var(--graphite);color:var(--white);overflow:hidden auto;display:flex;flex-direction:column;font:400 16.5px/1.68 var(--body);transition:opacity .35s ease,visibility .35s;
   padding-block:clamp(24px,5vh,48px);padding-left:max(clamp(20px,6vw,88px),env(safe-area-inset-left,0px));padding-right:max(clamp(20px,6vw,88px),env(safe-area-inset-right,0px))}
 .landing.out{opacity:0;visibility:hidden}
-.land-art{position:absolute;inset:0;width:100%;height:100%;min-height:100%;pointer-events:none}
+.land-art{position:absolute;right:0;bottom:4%;top:6%;width:57%;height:90%;pointer-events:none}
 .landing>*:not(.land-art){position:relative}
 .landing .plate{background:#fff;border-radius:3px;padding:8px 12px;width:clamp(128px,15vw,172px);align-self:flex-start;flex:none}
-.land-main{margin-top:auto;padding-top:48px;max-width:42rem}
+.land-main{margin-top:auto;padding-top:48px;max-width:min(42rem,40vw)}
 .landing .eyebrow{font:600 12px/1.4 var(--body);letter-spacing:.17em;text-transform:uppercase;color:var(--bronze);margin:0}
 .landing h1{font:800 clamp(2.7rem,7.2vw,5.1rem)/1.03 var(--head);letter-spacing:-.032em;margin:14px 0 14px;text-wrap:balance}
 .landing .sub{font:600 clamp(1.08rem,2.1vw,1.42rem)/1.32 var(--head);margin:0 0 20px;color:var(--on-dark)}
@@ -59,7 +59,7 @@ a{color:inherit}
 .btn.ghost{border-color:var(--line-dark);color:var(--on-dark);background:transparent}
 .btn.ghost:hover{border-color:var(--on-dark-2)}
 .colophon{display:flex;flex-wrap:wrap;gap:6px 26px;border-top:1px solid var(--line-dark);padding-top:15px;font-size:13px;color:var(--on-dark-2);margin:0}
-@media (max-width:760px){.land-art{opacity:.42}}
+@media (max-width:1040px){.landing .plate{order:1}.landing>.land-art{order:2;position:relative;right:auto;top:auto;bottom:auto;width:100%;height:auto;flex:1 1 170px;min-height:150px;margin-top:12px}.land-main{order:3;margin-top:0;padding-top:12px;max-width:42rem}.landing .desc{margin-bottom:22px}.land-actions{margin-bottom:24px}}
 @media (prefers-reduced-motion:reduce){.landing{transition:none}}
 
 /* The book */
@@ -286,21 +286,7 @@ tbody td:first-child{font-weight:600}
 <div class="a3intro" id="a3intro" hidden aria-hidden="true"><div class="mk"><img data-logo alt=""><div class="ibar"><i></i></div></div></div>
 
 <section class="landing" id="landing" aria-label="Cover">
-  <svg class="land-art" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <defs><pattern id="gr" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#FFFFFF" stroke-opacity=".028"/></pattern></defs>
-    <rect width="1200" height="800" fill="url(#gr)"/>
-    <g fill="none" stroke="#6F7E87" stroke-opacity=".5" stroke-width="1">
-      <path d="M1160 70C1020 70 1000 300 860 300"/><path d="M1160 170C1040 170 1000 300 860 300"/><path d="M1160 270C1060 270 1000 300 860 300"/><path d="M1160 370C1060 370 1000 300 860 300"/><path d="M1160 470C1040 470 1000 300 860 300"/><path d="M1160 570C1020 570 1000 300 860 300"/><path d="M1160 670C1000 670 1000 300 860 300"/>
-      <path d="M860 300H760" stroke-width="1.5"/><path d="M640 300H560"/>
-    </g>
-    <path d="M820 300H700" stroke="#557C68" stroke-width="2.5"/>
-    <g fill="#18232B" stroke="#8F9CA4" stroke-width="1.2">
-      <circle cx="1160" cy="70" r="6"/><circle cx="1160" cy="170" r="6"/><circle cx="1160" cy="270" r="6"/><circle cx="1160" cy="370" r="6"/><circle cx="1160" cy="470" r="6"/><circle cx="1160" cy="570" r="6"/><circle cx="1160" cy="670" r="6"/>
-      <circle cx="860" cy="300" r="15"/>
-    </g>
-    <circle cx="700" cy="300" r="24" fill="#557C68"/><circle cx="700" cy="300" r="39" fill="none" stroke="#557C68" stroke-opacity=".55"/>
-    <circle cx="560" cy="300" r="5" fill="#B58A61"/>
-  </svg>
+  <svg class="land-art" id="landArt" viewBox="0 100 900 620" preserveAspectRatio="xMaxYMax meet" aria-hidden="true"></svg>
   <div class="plate"><img data-logo alt="A3 Brands LLC"></div>
   <div class="land-main">
     <p class="eyebrow">Product handbook</p>
@@ -654,12 +640,13 @@ tbody td:first-child{font-weight:600}
     o = o || {};
     var body = o.body || '#22303A', line = o.line || '#EDEBE5', glass = o.glass || '#101920', w = o.sw || 2.4;
     function wheel(x) { return '<circle cx="' + x + '" cy="172" r="38" fill="' + (body === 'none' ? 'none' : '#0D141A') + '" stroke="' + line + '" stroke-width="' + w + '"/><circle cx="' + x + '" cy="172" r="23" fill="none" stroke="' + line + '" stroke-opacity=".7" stroke-width="' + (w * .7) + '"/><circle cx="' + x + '" cy="172" r="6" fill="' + line + '"/>' + [0, 72, 144, 216, 288].map(function (a) { return '<path d="M' + x + ' 172V151" stroke="' + line + '" stroke-opacity=".7" stroke-width="' + (w * .9) + '" stroke-linecap="round" transform="rotate(' + a + ' ' + x + ' 172)"/>'; }).join(''); }
-    return '<path d="M32 168C24 148 26 124 40 110C68 98 112 92 152 84C192 56 244 32 316 30C378 28 426 42 466 76C476 82 488 87 502 90C548 96 592 105 612 122C624 134 628 152 622 170L542 174C536 148 516 128 490 128C464 128 444 148 438 174H202C196 148 176 128 150 128C124 128 104 148 98 174Z" fill="' + body + '" stroke="' + line + '" stroke-width="' + w + '" stroke-linejoin="round"/>' +
+    function well(x) { return body === 'none' ? '' : '<circle cx="' + x + '" cy="170" r="46" fill="#0D141A"/>'; }
+    return well(150) + well(490) + '<path d="M32 168C24 148 26 124 40 110C68 98 112 92 152 84C192 56 244 32 316 30C378 28 426 42 466 76C476 82 488 87 502 90C548 96 592 105 612 122C624 134 628 152 622 170L542 174C536 148 516 128 490 128C464 128 444 148 438 174H202C196 148 176 128 150 128C124 128 104 148 98 174Z" fill="' + body + '" stroke="' + line + '" stroke-width="' + w + '" stroke-linejoin="round"/>' +
       '<path d="M174 86C208 62 252 46 306 44V92Z" fill="' + glass + '" stroke="' + line + '" stroke-opacity=".75" stroke-width="' + (w * .7) + '" stroke-linejoin="round"/>' +
       '<path d="M320 44C374 43 418 56 450 88L320 92Z" fill="' + glass + '" stroke="' + line + '" stroke-opacity=".75" stroke-width="' + (w * .7) + '" stroke-linejoin="round"/>' +
       '<path d="M313 44V174M44 122C150 110 400 106 606 120" fill="none" stroke="' + line + '" stroke-opacity=".32" stroke-width="' + (w * .6) + '"/>' +
       '<path d="M262 118h24M372 116h24" stroke="' + line + '" stroke-opacity=".75" stroke-width="' + (w * 1.1) + '" stroke-linecap="round"/>' +
-      '<path d="M578 108C594 110 608 120 615 132L584 124Z" fill="#F5F3EE"/><path d="M30 118L62 110V124L28 134Z" fill="#B58A61"/>' +
+      '<path d="M578 108C594 110 608 120 615 132L584 124Z" fill="#F5F3EE"/><path d="M36 112C48 108 60 106 72 104L70 114C58 116 44 120 31 126Z" fill="#B58A61"/>' +
       wheel(150) + wheel(490);
   }
   function star(x, y, r, fill) {
@@ -669,11 +656,25 @@ tbody td:first-child{font-weight:600}
   }
   function coverArt() {
     // Seven bars, one per review site, rising behind the car with five stars above.
-    var hs = [70, 104, 142, 186, 232, 282, 336], bars = hs.map(function (h, i) { return '<rect x="' + (214 + i * 46) + '" y="' + (404 - h) + '" width="32" height="' + h + '" rx="2" fill="#557C68" fill-opacity="' + (.34 + i * .07).toFixed(2) + '"/>'; }).join('');
+    var hs = [70, 104, 142, 186, 232, 282, 336], bars = hs.map(function (h, i) { return '<rect x="' + (214 + i * 46) + '" y="' + (404 - h) + '" width="32" height="' + h + '" rx="2" fill="#6CB648" fill-opacity="' + (.22 + i * .08).toFixed(2) + '"/>'; }).join('');
     var stars = [0, 1, 2, 3, 4].map(function (i) { return star(48 + i * 34, 112 - i * 6, 13, '#B58A61'); }).join('');
     return '<svg class="cover-art" viewBox="0 0 560 450" preserveAspectRatio="xMidYMax meet" aria-hidden="true">' + bars + stars +
       '<path d="M0 414H560" stroke="#6F7E87" stroke-width="1.5"/><path d="M14 434h60M112 434h60M210 434h60M308 434h60M406 434h60M504 434h56" stroke="#6F7E87" stroke-width="3" stroke-opacity=".6"/>' +
       '<ellipse cx="280" cy="412" rx="240" ry="7" fill="#0D141A"/><g transform="translate(14 237) scale(.84)">' + car() + '</g></svg>';
+  }
+  function heroArt(compact) {
+    // From the A3 Brands logo: a car in front of rising bars, with its green sweep.
+    var hs = compact ? [70, 100, 140, 180, 225, 275, 330] : [90, 140, 200, 265, 335, 410, 490], bars = hs.map(function (h, i) { return '<rect x="' + (150 + i * 100) + '" y="' + (640 - h) + '" width="62" height="' + h + '" rx="3" fill="url(#' + (i % 2 ? 'hbS' : 'hbG') + ')"/>'; }).join('');
+    var stars = [0, 1, 2, 3, 4].map(function (i) { return compact ? star(112 + i * 52, 432 - i * 22, 17, '#B58A61') : star(130 + i * 62, 334 - i * 32, 21, '#B58A61'); }).join('');
+    return '<defs><linearGradient id="hbG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6CB648"/><stop offset="1" stop-color="#6CB648" stop-opacity=".18"/></linearGradient>' +
+      '<linearGradient id="hbS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4C5C67"/><stop offset="1" stop-color="#4C5C67" stop-opacity=".2"/></linearGradient>' +
+      '<linearGradient id="hcar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3D505C"/><stop offset="1" stop-color="#18232B"/></linearGradient>' +
+      '<radialGradient id="hglow"><stop offset="0" stop-color="#6CB648" stop-opacity=".2"/><stop offset="1" stop-color="#6CB648" stop-opacity="0"/></radialGradient></defs>' +
+      '<ellipse cx="520" cy="480" rx="430" ry="290" fill="url(#hglow)"/>' + bars + stars +
+      '<path d="M70 641H900" stroke="#6F7E87" stroke-width="1.5"/><path d="M90 702h80M226 702h80M362 702h80M498 702h80M634 702h80M770 702h80" stroke="#6F7E87" stroke-width="4" stroke-opacity=".55"/>' +
+      '<ellipse cx="460" cy="643" rx="390" ry="11" fill="#0D141A"/>' +
+      '<path d="M70 664C260 696 650 702 892 640C650 684 290 688 70 664Z" fill="#6CB648"/>' +
+      '<g transform="translate(62 378) scale(1.25)">' + car({ body: 'url(#hcar)', sw: 2 }) + '</g>';
   }
   function road(i, n) {
     // The car moves along the road as the chapters go by.
@@ -1017,6 +1018,15 @@ tbody td:first-child{font-weight:600}
     if (at >= 0 && spreadOf(at) !== cur) go(spreadOf(at));
   });
 
+  // The artwork sits beside the text on a wide screen and above it on a narrow one.
+  var artQ = window.matchMedia('(max-width:1040px)'), landArt = document.getElementById('landArt');
+  function drawHero() {
+    landArt.setAttribute('viewBox', artQ.matches ? '40 300 860 420' : '0 100 900 620');
+    landArt.setAttribute('preserveAspectRatio', artQ.matches ? 'xMidYMid meet' : 'xMaxYMax meet');
+    landArt.innerHTML = heroArt(artQ.matches);
+  }
+  drawHero();
+  if (artQ.addEventListener) artQ.addEventListener('change', drawHero);
   build();
   // Page breaks depend on the real fonts, so lay out again once they arrive.
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { build(keyOf(cur)); });
