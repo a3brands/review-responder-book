@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="How A3 Review Responder works: platform overview and operational handbook from A3 Brands, for car dealerships.">
-<title>A3 Review Responder</title>
+<meta name="description" content="How RPM (Review Performance Manager) works: platform overview and operational handbook from A3 Brands, for car dealerships.">
+<title>RPM by A3 Brands</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
@@ -493,6 +493,19 @@ tbody td:first-child{color:var(--ink-head)}
 .narrow .toc-t{font-size:1.8em;margin:0 0 .35em}
 .narrow .toc a{padding:.4em 0}
 .narrow .key{padding:.6em .8em;margin:.7em 0}
+
+/* RPM title: the short name large, "by A3 Brands" beneath it */
+.by{display:block;font-size:.5em;line-height:1.1;letter-spacing:-.02em;margin-top:.12em}
+.page.cover h1 .a3{display:block}
+.page.cover h1{font-size:calc(var(--pw)*.17)}
+.narrow.book .page.cover h1{font-size:calc(var(--pw)*.2)}
+.page.cover .sub{margin-bottom:2.2%}
+.sub2{margin:0 0 2.6%;font:500 calc(var(--pw)*.0265)/1.3 var(--head);color:#D8DBDB}
+.narrow.book .sub2{font-size:max(14px,calc(var(--pw)*.038))}
+.landing h1 .a3{display:block}
+.landing .by{font-size:.46em}
+.landing .sub{margin-bottom:6px}
+.landing .sub2{font-size:15px;margin:0 0 18px;color:var(--on-dark-2)}
 </style>
 <noscript><style>#src{display:block;max-width:44rem;margin:0 auto;padding:24px;background:#F5F3EE}.reader,.landing{display:none}body{overflow:auto}</style></noscript>
 </head>
@@ -505,8 +518,9 @@ tbody td:first-child{color:var(--ink-head)}
   <div class="plate lg-w" role="img" aria-label="A3 Brands LLC"></div>
   <div class="land-main">
     <p class="eyebrow">Product handbook</p>
-    <h1><span class="a3">A3</span> Review Responder</h1>
-    <p class="sub">Platform Overview &amp; Operational Handbook</p>
+    <h1><span class="a3">RPM</span> <span class="by">by A3 Brands</span></h1>
+    <p class="sub">Review Performance Manager</p>
+    <p class="sub2">Platform Overview &amp; Operational Handbook</p>
     <p class="desc">How dealership reviews are collected from seven platforms, how AI suggests a response, and where a person decides what is published.</p>
     <div class="land-actions">
       <a class="btn solid" href="#cover" data-open="cover">Start reading →</a>
@@ -530,13 +544,13 @@ tbody td:first-child{color:var(--ink-head)}
 
 <div id="src">
 <section data-title="What it is" data-sum="One view of your reviews, with a person in charge of replies">
-<p>Customers review a dealership on many different websites. Keeping up means checking each one, writing a reply in the right tone, and doing it before an unhappy customer feels ignored. A3 Review Responder brings this work together, and the A3 team runs it for you.</p>
+<p>Customers review a dealership on many different websites. Keeping up means checking each one, writing a reply in the right tone, and doing it before an unhappy customer feels ignored. RPM brings this work together, and the A3 team runs it for you.</p>
     
       <p class="figcap">How the platform connects</p>
       <div class="hub">
         <ul><li>Google</li><li>DealerRater</li><li>Carfax</li><li>Carfax Service</li><li>Cars.com</li><li>CarGurus</li><li>Edmunds</li></ul>
         <span class="arrow" aria-hidden="true"></span>
-        <div class="centre">A3 Review Responder<small>Collects reviews, suggests replies and keeps the figures</small></div>
+        <div class="centre">RPM<small>Collects reviews, suggests replies and keeps the figures</small></div>
         <span class="arrow" aria-hidden="true"></span>
         <ul><li>A3 team: review and approve replies</li><li>Dealership: new review emails</li><li>Dealership: portal</li><li>Dealership: monthly reports</li></ul>
       </div>
@@ -835,7 +849,7 @@ tbody td:first-child{color:var(--ink-head)}
   function toLanding() {
     onLanding = true; readerEl.inert = true; closeMenu();
     landing.hidden = false; landing.inert = false; landing.classList.remove('out'); landing.scrollTop = 0;
-    document.title = 'A3 Review Responder';
+    document.title = 'RPM by A3 Brands';
     try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { /* the frame may refuse */ }
   }
   landing.addEventListener('click', function (e) {
@@ -877,11 +891,11 @@ tbody td:first-child{color:var(--ink-head)}
     book.className = 'book still' + (spreadMode ? '' : ' single') + (narrow ? ' narrow' : '');
   }
 
-  var footer = '<span class="ftl">A3 Brands<i>|</i>A3 Review Responder</span><span class="fno">00</span>';
+  var footer = '<span class="ftl">A3 Brands<i>|</i>RPM</span><span class="fno">00</span>';
   function plain(title, key) {
     var l = el('div', 'page');
     l.setAttribute('data-key', key);
-    l.appendChild(el('div', 'hd', '<span class="a">A3 Review Responder</span><b class="c"></b>'));
+    l.appendChild(el('div', 'hd', '<span class="a">RPM</span><b class="c"></b>'));
     l.querySelector('.c').textContent = title;
     l.appendChild(el('div', 'pg'));
     l.appendChild(el('div', 'ft', footer));
@@ -903,8 +917,8 @@ tbody td:first-child{color:var(--ink-head)}
     cover.setAttribute('data-key', 'cover');
     cover.classList.add('p-cover');
     cover.innerHTML = '<div class="cov-logo lg-w" role="img" aria-label="A3 Brands LLC, automotive SEO experts"></div>' +
-      '<p class="cov-eye">Product handbook</p><h1><span class="a3">A3</span> Review<br>Responder</h1>' +
-      '<p class="sub">Platform Overview &amp;<br>Operational Handbook</p><div class="cov-rule"></div>' +
+      '<p class="cov-eye">Product handbook</p><h1><span class="a3">RPM</span><span class="by">by A3 Brands</span></h1>' +
+      '<p class="sub">Review Performance Manager</p><div class="cov-rule"></div><p class="sub2">Platform Overview &amp; Operational Handbook</p>' +
       '<p class="desc">How dealership reviews are collected from seven platforms, how AI suggests a response, and where a person decides what is published.</p>' +
       '<p class="colo"><span>A3 Brands LLC</span><i>|</i><span>' + DATE + '</span></p>';
     add(cover);
@@ -913,14 +927,14 @@ tbody td:first-child{color:var(--ink-head)}
       var ep = el('div', 'page endp'); ep.setAttribute('data-key', 'title');
             add(ep);
       var tp = el('div', 'page titlep'); tp.setAttribute('data-key', 'title');
-      tp.innerHTML = '<div class="tp-logo lg-d" role="img" aria-label="A3 Brands LLC"></div><h2><span class="a3">A3</span> Review Responder</h2><p class="sub">Platform Overview &amp; Operational Handbook</p><div class="rule"></div><p class="small">' + EDITION + ', ' + DATE + '<br>A3 Brands LLC</p>';
+      tp.innerHTML = '<div class="tp-logo lg-d" role="img" aria-label="A3 Brands LLC"></div><h2><span class="a3">RPM</span> by A3 Brands</h2><p class="sub">Review Performance Manager<br>Platform Overview &amp; Operational Handbook</p><div class="rule"></div><p class="small">' + EDITION + ', ' + DATE + '<br>A3 Brands LLC</p>';
       add(tp);
     }
 
     var toc = plain('Contents', 'contents'); add(toc);
     var about = plain('About this handbook', 'about'); add(about);
     body(about).innerHTML = '<div class="toc-t">About this handbook</div>' +
-      '<p>This handbook explains how A3 Review Responder works and what it means for your dealership. It is written for dealership owners and managers.</p>' +
+      '<p>This handbook explains how RPM, the Review Performance Manager from A3 Brands, works and what it means for your dealership. It is written for dealership owners and managers.</p>' +
       '<p>It describes the platform as of ' + DATE + '. Where a feature differs between review sites, the text says so.</p>' +
       '<div class="key human">AI suggests the wording. A person decides what is published.</div>' +
       '<p class="figcap">How to read the diagrams</p><ul class="legend"><li><i class="c"></i>Done by the customer</li><li><i></i>Done automatically</li><li><i class="h"></i>Decided by a person</li></ul>' +
@@ -1000,7 +1014,7 @@ tbody td:first-child{color:var(--ink-head)}
     // The back cover is alone on the left once the book is closed.
     if (spreadMode && pages.length % 2 === 0) { var ee = el('div', 'page orn', '<div class="orn-logo lg-d"></div>'); ee.setAttribute('data-key', 'end'); add(ee); }
     var back = el('div', 'page backc'); back.setAttribute('data-key', 'back');
-    back.innerHTML = '<div class="back-logo lg-w" role="img" aria-label="A3 Brands LLC, automotive SEO experts"></div><div class="back-rule"></div><p>A3 Review Responder is built and run by A3 Brands LLC, automotive SEO experts.</p><p>This handbook describes the platform as of ' + DATE + '.</p>';
+    back.innerHTML = '<div class="back-logo lg-w" role="img" aria-label="A3 Brands LLC, automotive SEO experts"></div><div class="back-rule"></div><p>RPM (Review Performance Manager) is built and run by A3 Brands LLC, automotive SEO experts.</p><p>This handbook describes the platform as of ' + DATE + '.</p>';
     add(back);
 
     // Numbers count from the first chapter, so a left-hand page is even.
@@ -1093,7 +1107,7 @@ tbody td:first-child{color:var(--ink-head)}
       if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
     });
     try { history.replaceState(null, '', '#' + (tag === 'title' ? 'cover' : tag)); } catch (e) { /* the frame may refuse */ }
-    document.title = (cur === 0 ? '' : (c >= 0 ? sections[c].getAttribute('data-title') : 'Contents') + ' · ') + 'A3 Review Responder';
+    document.title = (cur === 0 ? '' : (c >= 0 ? sections[c].getAttribute('data-title') : 'Contents') + ' · ') + 'RPM by A3 Brands';
   }
   function buildMenu() {
     menu.innerHTML = '';
